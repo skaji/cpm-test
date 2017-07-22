@@ -16,7 +16,7 @@ ok !$r->out;
 like $r->err, qr/DONE install HTTP-Tinyish-/;
 diag $r->err;
 
-$r = cpm_install "--test", "Process::Pipeline";
+$r = cpm_install "Process::Pipeline";
 is $r->exit, 0;
 ok !$r->out;
 like $r->err, qr/DONE install Process-Pipeline-/;
