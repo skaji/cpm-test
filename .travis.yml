@@ -1,14 +1,15 @@
-language: perl
+language: ruby
 dist: trusty
 sudo: false
 env:
   - PERL_VERSION=5.8.1
   - PERL_VERSION=5.10.1
 install:
-  - wget https://github.com/skaji/cpm-test/releases/download/0.01/ubuntu-14.04-perl-$PERL_VERSION.tar.gz -O ubuntu-14.04-perl-$PERL_VERSION.tar.gz
+  - curl -sSL --compressed https://git.io/cpm -o cpm
+  - wget -q https://github.com/skaji/cpm-test/releases/download/0.01/ubuntu-14.04-perl-$PERL_VERSION.tar.gz -O ubuntu-14.04-perl-$PERL_VERSION.tar.gz
   - tar xzf ubuntu-14.04-perl-$PERL_VERSION.tar.gz -C /tmp
   - export PATH=/tmp/perl-$PERL_VERSION/bin:$PATH
-  - curl -sSL --compressed https://git.io/cpm -o cpm
-script:
   - perl -V
+  - perl cpm -V
+script:
   - perl -MTest::Harness -e 'runtests(@ARGV)' t/*
