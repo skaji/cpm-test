@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 6;
+use Test::More tests => 9;
 use lib "lib";
 use CLI;
 
@@ -14,4 +14,10 @@ $r = cpm_install "HTTP::Tinyish";
 is $r->exit, 0;
 ok !$r->out;
 like $r->err, qr/DONE install HTTP-Tinyish-/;
+diag $r->err;
+
+$r = cpm_install "--test", "Process::Pipeline";
+is $r->exit, 0;
+ok !$r->out;
+like $r->err, qr/DONE install Process-Pipeline-/;
 diag $r->err;
