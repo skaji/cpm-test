@@ -4,6 +4,7 @@ sudo: false
 env:
   - PERL_VERSION=5.8.1
   - PERL_VERSION=5.10.1
+  - PERL_VERSION=5.16.3
 install:
   - curl -sSL --compressed https://git.io/cpm -o cpm
   - curl -sSL https://github.com/skaji/cpm-test/releases/download/0.01/ubuntu-14.04-perl-$PERL_VERSION.tar.gz -o ubuntu-14.04-perl-$PERL_VERSION.tar.gz

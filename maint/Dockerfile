@@ -28,6 +28,16 @@ RUN cd /tmp/src && \
 RUN cd /tmp && \
    tar czf ubuntu-14.04-perl-5.10.1.tar.gz perl-5.10.1
 
+RUN cd /tmp/src && \
+  wget -q https://cpan.metacpan.org/authors/id/R/RJ/RJBS/perl-5.16.3.tar.gz && \
+  tar xzf perl-5.16.3.tar.gz && \
+  patchperl perl-5.16.3 5.16.3 && \
+  cd perl-5.16.3 && \
+  ./Configure -Dman1dir=none -Dman3dir=none -Dprefix=/tmp/perl-5.16.3 -des && \
+  make install
+RUN cd /tmp && \
+   tar czf ubuntu-14.04-perl-5.16.3.tar.gz perl-5.16.3
+
 CMD ["sleep", "infinity"]
 
 # docker cp 63750560a8a1:/tmp/ubuntu-14.04-perl-5.8.1.tar.gz  .
