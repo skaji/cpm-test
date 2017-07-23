@@ -8,16 +8,16 @@ my $r = cpm_install "App::FatPacker";
 is $r->exit, 0;
 ok !$r->out;
 like $r->err, qr/DONE install App-FatPacker-/;
-diag "\n" . $r->err;
+_diag $r->err;
 
 $r = cpm_install "HTTP::Tinyish";
 is $r->exit, 0;
 ok !$r->out;
 like $r->err, qr/DONE install HTTP-Tinyish-/;
-diag "\n" . $r->err;
+_diag $r->err;
 
 $r = cpm_install "Process::Pipeline";
 is $r->exit, 0;
 ok !$r->out;
 like $r->err, qr/DONE install Process-Pipeline-/;
-diag "\n" . $r->err;
+_diag $r->err;

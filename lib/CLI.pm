@@ -4,10 +4,11 @@ use warnings;
 use utf8;
 use File::Temp 'tempdir';
 use base 'Exporter';
+use IO::Handle;
 use File::Basename ();
 use File::Spec;
 use Cwd 'abs_path';
-our @EXPORT = qw(cpm_install with_same_local with_same_home);
+our @EXPORT = qw(cpm_install with_same_local with_same_home _diag);
 
 my $base = abs_path( File::Spec->catdir(File::Basename::dirname(__FILE__), "..") );
 
@@ -68,5 +69,16 @@ sub cpm_install {
     Result->new(home => $home, local => $local, out => $out, err => $err, exit => $exit, logfile => $logfile);
 }
 
+my $flush = sub {
+    STDOUT->flush;
+    STDERR->flush;
+    select undef, undef, undef, 0.1;
+};
+
+sub _diag {
+    $flush->();
+    Test::More::diag("\n", @_);
+    $flush->();
+}
 
 1;
