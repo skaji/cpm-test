@@ -56,6 +56,7 @@ sub cpm_install {
     if ($pid == 0) {
         open STDOUT, ">&", $stdout or die;
         open STDERR, ">&", $stderr or die;
+        delete $ENV{$_} for grep /^PERL_CPM_/, keys %ENV;
         exec $^X, "-I$base/lib", "$base/cpm", "install", "-L", $local, "--home", $home, "--exclude-vendor", @argv;
         exit 255;
     }
