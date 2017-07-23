@@ -8,7 +8,7 @@ use IO::Handle;
 use File::Basename ();
 use File::Spec;
 use Cwd 'abs_path';
-our @EXPORT = qw(cpm_install with_same_local with_same_home _diag);
+our @EXPORT = qw(cpm_install cpm_path with_same_local with_same_home _diag);
 
 my $base = abs_path( File::Spec->catdir(File::Basename::dirname(__FILE__), "..") );
 
@@ -46,6 +46,10 @@ sub with_same_home (&) {
     $sub->();
 }
 
+sub cpm_path {
+    $ENV{TEST_CPM_PATH} || "$base/cpm";
+}
+
 sub cpm_install {
     my @argv = @_;
     my $local = $_LOCAL || tempdir DIR => $TEMPDIR;
@@ -58,7 +62,7 @@ sub cpm_install {
         open STDOUT, ">&", $stdout or die;
         open STDERR, ">&", $stderr or die;
         delete $ENV{$_} for grep /^PERL_CPM_/, keys %ENV;
-        exec $^X, "-I$base/lib", "$base/cpm", "install", "-L", $local, "--home", $home, "--exclude-vendor", @argv;
+        exec $^X, "-I$base/lib", cpm_path, "install", "-L", $local, "--home", $home, "--exclude-vendor", @argv;
         exit 255;
     }
     waitpid $pid, 0;

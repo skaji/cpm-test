@@ -13,4 +13,4 @@ install:
   - perl -V
   - perl cpm -V
 script:
-  - perl -MTest::Harness -e 'runtests(@ARGV)' t/*
+  - make test
