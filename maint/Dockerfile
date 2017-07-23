@@ -7,36 +7,12 @@ RUN apt-get install -y build-essential wget curl tar gzip perl patch libssl-dev
 RUN curl -sSL http://cpanmin.us | perl - -nq Devel::PatchPerl
 
 RUN mkdir /tmp/src
+ADD build.sh /tmp/src/build.sh
 
-RUN cd /tmp/src && \
-  wget -q https://cpan.metacpan.org/authors/id/J/JH/JHI/perl-5.8.1.tar.gz && \
-  tar xzf perl-5.8.1.tar.gz && \
-  patchperl perl-5.8.1 5.8.1 && \
-  cd perl-5.8.1 && \
-  ./Configure -Dman1dir=none -Dman3dir=none -Dprefix=/tmp/perl-5.8.1 -des && \
-  make install
-RUN cd /tmp && \
-   tar czf ubuntu-14.04-perl-5.8.1.tar.gz perl-5.8.1
-
-RUN cd /tmp/src && \
-  wget -q https://cpan.metacpan.org/authors/id/D/DA/DAPM/perl-5.10.1.tar.gz && \
-  tar xzf perl-5.10.1.tar.gz && \
-  patchperl perl-5.10.1 5.10.1 && \
-  cd perl-5.10.1 && \
-  ./Configure -Dman1dir=none -Dman3dir=none -Dprefix=/tmp/perl-5.10.1 -des && \
-  make install
-RUN cd /tmp && \
-   tar czf ubuntu-14.04-perl-5.10.1.tar.gz perl-5.10.1
-
-RUN cd /tmp/src && \
-  wget -q https://cpan.metacpan.org/authors/id/R/RJ/RJBS/perl-5.16.3.tar.gz && \
-  tar xzf perl-5.16.3.tar.gz && \
-  patchperl perl-5.16.3 5.16.3 && \
-  cd perl-5.16.3 && \
-  ./Configure -Dman1dir=none -Dman3dir=none -Dprefix=/tmp/perl-5.16.3 -des && \
-  make install
-RUN cd /tmp && \
-   tar czf ubuntu-14.04-perl-5.16.3.tar.gz perl-5.16.3
+RUN cd /tmp/src && ./build.sh https://cpan.metacpan.org/authors/id/J/JH/JHI/perl-5.8.1.tar.gz
+RUN cd /tmp/src && ./build.sh https://cpan.metacpan.org/authors/id/D/DA/DAPM/perl-5.10.1.tar.gz
+RUN cd /tmp/src && ./build.sh https://cpan.metacpan.org/authors/id/R/RJ/RJBS/perl-5.16.3.tar.gz
+RUN cd /tmp/src && ./build.sh https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX/perl-5.26.0.tar.gz
 
 CMD ["sleep", "infinity"]
 
