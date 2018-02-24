@@ -10,7 +10,7 @@ PERL_VERSION="${NAME##*-}"
 set -eux
 
 curl -sSL -o "$TARBALL" "$URL"
-tar xzf "$TARBALL"
+tar xf "$TARBALL"
 patchperl "$NAME" "$PERL_VERSION"
 cd "$NAME"
 ./Configure -Dman1dir=none -Dman3dir=none -Dprefix="/tmp/$NAME" -des
