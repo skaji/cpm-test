@@ -4,10 +4,10 @@ env:
   - PERL_VERSION=5.8.1
   - PERL_VERSION=5.10.1
   - PERL_VERSION=5.16.3
-  - PERL_VERSION=5.26.2
+  - PERL_VERSION=5.28.0
 install:
-  - curl -sSL --compressed https://git.io/cpm -o cpm
-  - curl -sSL https://github.com/skaji/cpm-test/releases/download/0.01/ubuntu-14.04-perl-$PERL_VERSION.tar.xz -o ubuntu-14.04-perl-$PERL_VERSION.tar.xz
+  - curl -fsSL --compressed https://git.io/cpm -o cpm
+  - curl -fsSL https://github.com/skaji/cpm-test/releases/download/0.01/ubuntu-14.04-perl-$PERL_VERSION.tar.xz -o ubuntu-14.04-perl-$PERL_VERSION.tar.xz
   - tar xJf ubuntu-14.04-perl-$PERL_VERSION.tar.xz -C /tmp
   - export PATH=/tmp/perl-$PERL_VERSION/bin:$PATH
 script:

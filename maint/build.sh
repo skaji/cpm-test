@@ -9,7 +9,7 @@ PERL_VERSION="${NAME##*-}"
 
 set -eux
 
-curl -sSL -o "$TARBALL" "$URL"
+curl -fsSL -o "$TARBALL" "$URL"
 tar xf "$TARBALL"
 patchperl "$NAME" "$PERL_VERSION"
 cd "$NAME"
