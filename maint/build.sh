@@ -16,4 +16,6 @@ cd "$NAME"
 ./Configure -Dman1dir=none -Dman3dir=none -Dprefix="/tmp/$NAME" -des
 make install
 cd /tmp
-tar cJf ubuntu-14.04-$NAME.tar.xz $NAME
+
+VERSION=$(/tmp/$NAME/bin/perl -F= -anle 'print $F[-1] if /DISTRIB_RELEASE/' /etc/lsb-release)
+tar cJf ubuntu-$VERSION-$NAME.tar.xz $NAME
