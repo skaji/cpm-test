@@ -1,0 +1,37 @@
+name: linux
+
+on:
+  push:
+    branches:
+      - '*'
+    tags-ignore:
+      - '*'
+  pull_request:
+
+jobs:
+  perl:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        perl-version:
+          - '5.8.1'
+          - '5.10.1'
+          - '5.16.3'
+          - '5.30.2'
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Perl
+        run: |
+          curl -fsSL https://github.com/skaji/cpm-test/releases/download/0.01/ubuntu-18.04-perl-${{ matrix.perl-version }}.tar.xz | tar xJf - -C /tmp
+          echo '##[add-path]/tmp/perl-${{ matrix.perl-version }}/bin'
+      - name: Setup cpm
+        run: curl -fsSL --compressed https://git.io/cpm -o cpm
+      - name: Show versions
+        run: |
+          perl -V
+          perl cpm -V
+      - name: Run tests
+        run: make test
