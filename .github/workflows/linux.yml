@@ -21,6 +21,8 @@ jobs:
           - '5.8.1'
           - '5.10.1'
           - '5.16.3'
+          - '5.18.4'
+          - '5.20.3'
           - '5.30.2'
 
     steps:
@@ -28,7 +30,7 @@ jobs:
       - name: Setup Perl
         run: |
           curl -fsSL https://github.com/skaji/cpm-test/releases/download/0.01/ubuntu-18.04-perl-${{ matrix.perl-version }}.tar.xz | tar xJf - -C /tmp
-          echo '##[add-path]/tmp/perl-${{ matrix.perl-version }}/bin'
+          echo /tmp/perl-${{ matrix.perl-version }}/bin >> $GITHUB_PATH
       - name: Setup cpm
         run: curl -fsSL --compressed https://git.io/cpm -o cpm
       - name: Show versions
