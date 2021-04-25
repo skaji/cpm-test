@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y
@@ -6,7 +6,7 @@ RUN apt-get install -y build-essential git wget curl tar gzip bzip2 xz-utils per
 
 RUN git clone https://github.com/skaji/perl-install
 RUN set -eux; \
-  for v in 5.8.1 5.10.1 5.16.3 5.30.2; do \
+  for v in 5.8.1 5.10.1 5.16.3 5.18.4 5.32.1; do \
     perl-install/perl-install --noman $v /tmp/perl-$v; \
     tar cJf perl-$v.tar.xz -C /tmp perl-$v; \
   done; \
