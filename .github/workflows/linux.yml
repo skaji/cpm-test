@@ -31,7 +31,7 @@ jobs:
           curl -fsSL https://github.com/skaji/cpm-test/releases/download/0.01/ubuntu-20.04-perl-${{ matrix.perl-version }}.tar.xz | tar xJf - -C /tmp
           echo /tmp/perl-${{ matrix.perl-version }}/bin >> $GITHUB_PATH
       - name: Setup cpm
-        run: curl -fsSL --compressed https://git.io/cpm -o cpm
+        run: curl -fsSL --compressed https://raw.githubusercontent.com/skaji/cpm/main/cpm -o cpm
       - name: Show versions
         run: |
           perl -V
