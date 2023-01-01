@@ -21,8 +21,8 @@ ok !$r->out;
 like $r->err, qr/DONE install HTTP-Tinyish-/;
 _diag $r->err;
 
-$r = cpm_install "Process::Pipeline";
+$r = cpm_install "CPAN::Test::Dummy::Perl5::ModuleBuild";
 is $r->exit, 0;
 ok !$r->out;
-like $r->err, qr/DONE install Process-Pipeline-/;
+like $r->err, qr/DONE install CPAN-Test-Dummy-Perl5-ModuleBuild-/;
 _diag $r->err;
