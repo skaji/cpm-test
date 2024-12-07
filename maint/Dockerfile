@@ -1,4 +1,6 @@
-FROM ubuntu:22.04 AS builder
+FROM ubuntu:24.04 AS builder
+
+ARG VERSIONS="5.8.1  5.10.1  5.16.3  5.18.4  5.40.0"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
@@ -7,8 +9,13 @@ RUN apt-get install -y \
 
 RUN git clone https://github.com/skaji/perl-install
 
-RUN perl-install/perl-install 5.40.0 /tmp/perl-5.40.0 && \
-  tar cJf perl-5.40.0.tar.xz -C /tmp perl-5.40.0
+RUN <<EOF bash
+  set -euxo pipefail
+  for v in $VERSIONS; do
+    perl-install/perl-install \$v /tmp/perl-\$v
+    tar cJf perl-\$v.tar.xz -C /tmp perl-\$v
+  done
+EOF
 
 FROM scratch
-COPY --from=builder /perl-5.40.0.tar.xz /
+COPY --from=builder /perl-*.tar.xz /
