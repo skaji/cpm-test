@@ -1,6 +1,6 @@
 FROM ubuntu:24.04 AS builder
 
-ARG VERSIONS="5.8.1  5.10.1  5.16.3  5.18.4  5.40.0"
+ARG VERSIONS="5.42.2"
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
@@ -12,8 +12,8 @@ RUN git clone https://github.com/skaji/perl-install
 RUN <<EOF bash
   set -euxo pipefail
   for v in $VERSIONS; do
-    perl-install/perl-install \$v /tmp/perl-\$v
-    tar cJf perl-\$v.tar.xz -C /tmp perl-\$v
+    perl-install/perl-install \$v /tmp/perl-latest
+    tar cJf perl-latest.tar.xz -C /tmp perl-latest
   done
 EOF
 
