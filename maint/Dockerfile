@@ -5,8 +5,7 @@ RUN apt-get update -y -qq -o=Dpkg::Use-Pty=0
 RUN apt-get install -y -qq -o=Dpkg::Use-Pty=0 \
   build-essential git wget curl tar gzip bzip2 xz-utils perl patch libssl-dev
 
-RUN <<EOF bash
-set -euxo pipefail
+RUN <<EOF bash -euxo pipefail
 
 curl -fsSL https://github.com/skaji/cpm/releases/latest/download/cpm | \
   perl - install -g https://github.com/skaji/perl-Devel-PatchPerl-SKAJI.git CPAN::Perl::Releases::MetaCPAN
