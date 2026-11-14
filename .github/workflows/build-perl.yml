@@ -5,13 +5,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build archives
         run: docker build -o out -f maint/Dockerfile .
       - name: Upload archives
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: perl-archives
           path: out/*.tar.xz
