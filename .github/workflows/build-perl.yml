@@ -1,0 +1,19 @@
+name: Build Perl archives
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build archives
+        run: docker build -o out -f maint/Dockerfile .
+      - name: Upload archives
+        uses: actions/upload-artifact@v6
+        with:
+          name: perl-archives
+          path: out/*.tar.xz
+          if-no-files-found: error
+          compression-level: 0
