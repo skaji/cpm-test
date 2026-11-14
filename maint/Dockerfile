@@ -1,14 +1,14 @@
 FROM ubuntu:26.04 AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -y
-RUN apt-get install -y \
+RUN apt-get update -y -q
+RUN apt-get install -y -q \
   build-essential git wget curl tar gzip bzip2 xz-utils perl patch libssl-dev
 
 RUN <<EOF bash
 set -euxo pipefail
 
-curl -fsSL -o cpm https://github.com/skaji/cpm/releases/latest/download/cpm | \
+curl -fsSL https://github.com/skaji/cpm/releases/latest/download/cpm | \
   perl - install -g https://github.com/skaji/perl-Devel-PatchPerl-SKAJI.git CPAN::Perl::Releases::MetaCPAN
 
 mkdir src
