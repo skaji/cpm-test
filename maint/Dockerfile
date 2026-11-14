@@ -10,8 +10,8 @@ RUN git clone https://github.com/skaji/perl-install
 RUN <<EOF bash
 set -euxo pipefail
 
-perl-install/perl-install 5.24.4 /tmp/perl-5.24.4
-perl-install/perl-install latest /tmp/perl-latest
+perl-install/perl-install --show-log-on-failure 5.24.4 /tmp/perl-5.24.4
+perl-install/perl-install --show-log-on-failure latest /tmp/perl-latest
 tar cJf perl-5.24.4.tar.xz -C /tmp perl-5.24.4
 tar cJf perl-latest.tar.xz -C /tmp perl-latest
 EOF
