@@ -11,9 +11,11 @@ set -euxo pipefail
 curl -fsSL https://github.com/skaji/cpm/releases/latest/download/cpm | \
   perl - install -g https://github.com/skaji/perl-Devel-PatchPerl-SKAJI.git CPAN::Perl::Releases::MetaCPAN
 
-perl -V
-echo $PATH
-which -a perl-release
+perl-release -h
+perl-release
+perl-release 5.24.4
+exit 1
+
 
 mkdir src
 
